@@ -54,3 +54,27 @@ def show_help(client, callback_query):
             [InlineKeyboardButton('⛔️ Close', callback_data='cancel')]
         ])
     )
+
+HELP_TEXT = """
+**HOW TO USE ME**
+
+- Send private channel or group post link.
+- Example: `https://t.me/123456789`
+
+**SUPPORTED CONTENT TYPES**
+
+- Text
+- Photos
+- Videos
+- Documents
+- Polls
+- Locations
+- Animations
+- Stickers
+- Voice Messages
+- Audio Messages
+
+©️ Channel : @NT_BOT_CHANNEL
+"""
+
+
