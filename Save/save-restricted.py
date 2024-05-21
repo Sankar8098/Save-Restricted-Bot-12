@@ -8,7 +8,7 @@ import os
 import threading
 import json
 
-@app.on_message(filters.text)
+@Client.on_message(filters.text)
 def save(client, message):
     try:
         if "https://t.me/+" in message.text or "https://t.me/joinchat/" in message.text:
