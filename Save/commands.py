@@ -15,7 +15,7 @@ async def cancel(client, callback_query):
 # start command
 @Client.on_message(filters.command(["start"]))
 def send_start(client, message):
-    app.send_message(
+    client.send_message(
         message.chat.id,
         f"👋 Hi **{message.from_user.mention}**, I am Save Restricted Bot! 🤖\n\n"
         "I can help you retrieve and forward restricted content from Telegram posts.\n\n"
@@ -40,7 +40,7 @@ def send_start(client, message):
 # help command
 @Client.on_message(filters.command(["help"]))
 def send_help(client, message):
-    app.send_message(
+    client.send_message(
         message.chat.id,
         HELP_TEXT,
     )
