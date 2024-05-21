@@ -2,7 +2,11 @@
 
 # [⚠️ Do not change this repo link ⚠️] :- https://github.com/LISA-KOREA/Save-Restricted-Bot
 
-
+from pyrogram.errors import UserAlreadyParticipant, InviteHashExpired, UsernameNotOccupied, FloodWait, RPCError
+from pyrogram import Client, filters
+import os
+import threading
+import json
 
 @app.on_message(filters.text)
 def save(client, message):
@@ -209,3 +213,52 @@ def get_message_type(msg):
         return "Text"
     except AttributeError:
         pass
+
+
+
+
+
+###################
+# download status
+def downstatus(statusfile, message):
+    while not os.path.exists(statusfile):
+        time.sleep(1)
+
+    time.sleep(1)
+    while os.path.exists(statusfile):
+        with open(statusfile, "r") as downread:
+            txt = downread.read()
+        try:
+            app.edit_message_text(message.chat.id, message.id, f"__Downloaded__: **{txt}**")
+            time.sleep(5)
+        except FloodWait as e:
+            time.sleep(e.x)
+        except RPCError:
+            pass
+
+# upload status
+def upstatus(statusfile, message):
+    while not os.path.exists(statusfile):
+        time.sleep(1)
+
+    time.sleep(1)
+    while os.path.exists(statusfile):
+        with open(statusfile, "r") as upread:
+            txt = upread.read()
+        try:
+            app.edit_message_text(message.chat.id, message.id, f"__Uploaded__: **{txt}**")
+            time.sleep(5)
+        except FloodWait as e:
+            time.sleep(e.x)
+        except RPCError:
+            pass
+
+# progress writer
+def progress(current, total, message, type):
+    with open(f'{message.id}{type}status.txt', "w") as fileup:
+        fileup.write(f"{current * 100 / total:.1f}%")
+
+
+
+
+
